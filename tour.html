@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Virtual 360° - USP Gamificada</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="tour-page">
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-left">
+                    <button class="btn btn-ghost" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i>
+                        Voltar
+                    </button>
+                    <div class="header-info">
+                        <h1>Tour Virtual 360°</h1>
+                        <p>Explore o campus da USP</p>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <button class="sound-toggle" onclick="toggleSound()">
+                        <i id="soundIcon" class="fas fa-volume-up"></i>
+                    </button>
+
+                    <div class="tour-progress">
+                        <div class="progress-text">
+                            <span id="visitedCount">0</span>/<span id="totalPoints">5</span> Pontos
+                        </div>
+                        <div class="xp-earned">+<span id="totalXP">0</span> XP</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tour-progress-bar">
+                <div class="progress-fill" id="tourProgress"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tour Container -->
+    <div class="tour-container">
+        <div class="container">
+            <div class="tour-layout">
+                <!-- Interactive Map -->
+                <div class="tour-main">
+                    <div class="map-container">
+                        <div class="campus-map" id="campusMap">
+                            <div class="map-background">
+                                <div class="map-grid"></div>
+                            </div>
+
+                            <!-- Tour Points -->
+                            <div class="tour-point" data-point="reitoria" style="left: 30%; top: 40%;">
+                                <div class="point-marker">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="point-label">Reitoria</div>
+                            </div>
+
+                            <div class="tour-point" data-point="biblioteca" style="left: 60%; top: 30%;">
+                                <div class="point-marker">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="point-label">Biblioteca Central</div>
+                            </div>
+
+                            <div class="tour-point" data-point="museu" style="left: 20%; top: 70%;">
+                                <div class="point-marker">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="point-label">Museu de Arte</div>
+                            </div>
+
+                            <div class="tour-point" data-point="laboratorio" style="left: 80%; top: 60%;">
+                                <div class="point-marker">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="point-label">Laboratórios</div>
+                            </div>
+
+                            <div class="tour-point" data-point="praca" style="left: 50%; top: 50%;">
+                                <div class="point-marker">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="point-label">Praça do Relógio</div>
+                            </div>
+
+                            <!-- Compass -->
+                            <div class="compass" id="compass">
+                                <i class="fas fa-compass"></i>
+                            </div>
+
+                            <!-- Current Location Indicator -->
+                            <div class="current-location hidden" id="currentLocation">
+                                <i class="fas fa-navigation"></i>
+                                <span id="currentLocationName">Reitoria</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tour Controls -->
+                    <div class="tour-controls">
+                        <button class="btn btn-secondary" id="autoTourBtn" onclick="toggleAutoTour()">
+                            <i class="fas fa-play"></i>
+                            <span>Tour Automático</span>
+                        </button>
+
+                        <button class="btn btn-secondary" onclick="resetTour()">
+                            <i class="fas fa-redo"></i>
+                            Resetar
+                        </button>
+
+                        <button class="btn btn-secondary" onclick="toggleFullscreen()">
+                            <i class="fas fa-expand"></i>
+                            Tela Cheia
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Point Details Sidebar -->
+                <div class="tour-sidebar">
+                    <!-- Progress Card -->
+                    <div class="sidebar-card progress-card">
+                        <h3>Progresso do Tour</h3>
+                        <div class="progress-info">
+                            <div class="progress-stats">
+                                <span class="progress-badge" id="progressBadge">0/5</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="sidebarProgress"></div>
+                            </div>
+                            <div class="progress-details">
+                                <span>XP Ganho: <span id="sidebarXP">0</span></span>
+                                <span><span id="progressPercent">0</span>% Completo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current Point Details -->
+                    <div class="sidebar-card point-details hidden" id="pointDetails">
+                        <div class="point-image">
+                            <img id="pointImage" src="/placeholder.svg" alt="">
+                            <div class="point-badge hidden" id="visitedBadge">
+                                <i class="fas fa-check"></i>
+                                Visitado
+                            </div>
+                        </div>
+
+                        <div class="point-info">
+                            <h3 id="pointName">Nome do Local</h3>
+                            <p id="pointDescription">Descrição do local...</p>
+
+                            <div class="point-facts">
+                                <h4>Curiosidades:</h4>
+                                <ul id="pointFactsList">
+                                    <!-- Facts will be populated by JavaScript -->
+                                </ul>
+                            </div>
+
+                            <div class="point-actions">
+                                <span class="xp-badge" id="pointXP">+50 XP</span>
+                                <button class="btn btn-primary btn-sm" onclick="view360()">
+                                    <i class="fas fa-camera"></i>
+                                    Ver em 360°
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Points List -->
+                    <div class="sidebar-card points-list">
+                        <h3>Pontos de Interesse</h3>
+                        <div class="points-container" id="pointsList">
+                            <!-- Points list will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Achievement Card -->
+                    <div class="sidebar-card achievement-card hidden" id="completionAchievement">
+                        <div class="achievement-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Parabéns!</h3>
+                        <p>Você completou o tour virtual!</p>
+                        <div class="achievement-badge">
+                            Explorador Master Desbloqueado
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 360° Viewer Modal -->
+    <div id="viewer360Modal" class="modal">
+        <div class="modal-content viewer-modal">
+            <div class="modal-header">
+                <h3 id="viewerTitle">Vista 360°</h3>
+                <button class="close-btn" onclick="closeViewer360()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="viewer-container">
+                <div class="viewer-placeholder">
+                    <i class="fas fa-camera"></i>
+                    <p>Vista 360° do local</p>
+                    <small>Use o mouse para navegar</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="tour.js"></script>
+</body>
+</html>

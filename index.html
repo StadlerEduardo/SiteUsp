@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USP Gamificada - Explore, Aprenda e Conquiste</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Welcome Modal -->
+    <div id="welcomeModal" class="modal active">
+        <div class="modal-content welcome-modal">
+            <div class="welcome-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <h2>Bem-vindo à USP Gamificada!</h2>
+            <p>Explore, aprenda e conquiste badges enquanto descobre tudo sobre a Universidade de São Paulo!</p>
+            <button class="btn btn-primary" onclick="closeWelcomeModal()">
+                <i class="fas fa-play"></i>
+                Começar Aventura
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">
+                        <span>USP</span>
+                    </div>
+                    <div class="header-info">
+                        <h1>USP Gamificada</h1>
+                        <p>Sua jornada de descoberta</p>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <button class="sound-toggle" onclick="toggleSound()">
+                        <i id="soundIcon" class="fas fa-volume-up"></i>
+                    </button>
+
+                    <div class="user-progress">
+                        <div class="progress-info">
+                            <div class="level-info">
+                                <i class="fas fa-crown"></i>
+                                <span>Nível <span id="userLevel">1</span></span>
+                            </div>
+                            <div class="xp-bar">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="xpProgress" style="width: 30%"></div>
+                                </div>
+                                <span class="xp-text"><span id="currentXP">150</span> XP</span>
+                            </div>
+                        </div>
+                        <div class="user-avatar">
+                            <span>U</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <div class="badge">🎮 Experiência Gamificada</div>
+                    <h1 class="hero-title">
+                        Descubra a <span class="gradient-text">USP</span> de forma interativa
+                    </h1>
+                    <p class="hero-description">
+                        Explore a história, conquiste badges, complete missões e torne-se um expert na Universidade de São Paulo!
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="startTour()">
+                            <i class="fas fa-play"></i>
+                            Iniciar Tour Virtual
+                        </button>
+                        <button class="btn btn-secondary" onclick="startQuiz()">
+                            <i class="fas fa-brain"></i>
+                            Quiz Interativo
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <div class="hero-image">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/FtUsp.jpg-XW2zk9vNv9FwPurRW9NFExZSlF8uxx.jpeg" alt="Fachada da USP">
+                        <div class="image-overlay">
+                            <h3>Campus Histórico</h3>
+                            <p>91 anos de excelência</p>
+                        </div>
+                    </div>
+
+                    <!-- Floating Cards -->
+                    <div class="floating-card floating-card-1">
+                        <i class="fas fa-trophy"></i>
+                        <div>
+                            <strong>Top 100</strong>
+                            <small>Mundial</small>
+                        </div>
+                    </div>
+
+                    <div class="floating-card floating-card-2">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <strong>90k+</strong>
+                            <small>Alunos</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="quick-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="fade-up">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="stat-value" data-count="183">0</div>
+                    <div class="stat-label">Cursos</div>
+                </div>
+
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-icon green">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-value" data-count="90000">0</div>
+                    <div class="stat-label">Alunos</div>
+                </div>
+
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="stat-value" data-count="42">0</div>
+                    <div class="stat-label">Unidades</div>
+                </div>
+
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-icon yellow">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-value">Top 100</div>
+                    <div class="stat-label">Ranking</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="achievements">
+        <div class="container">
+            <div class="section-header">
+                <h2>Suas Conquistas</h2>
+                <p>Badges que você já desbloqueou em sua jornada</p>
+            </div>
+
+            <div class="achievements-grid" id="achievementsGrid">
+                <!-- Achievements will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Active Quests -->
+    <section class="quests">
+        <div class="container">
+            <div class="section-header">
+                <h2>Missões Ativas</h2>
+                <p>Complete missões para ganhar XP e desbloquear novos conteúdos</p>
+            </div>
+
+            <div class="quests-grid" id="questsGrid">
+                <!-- Quests will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation Cards -->
+    <section class="navigation-cards">
+        <div class="container">
+            <div class="section-header">
+                <h2>Explore a USP</h2>
+                <p>Escolha sua próxima aventura</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="nav-card" onclick="openPage('tour.html')">
+                    <div class="card-icon blue-gradient">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Tour Virtual 360°</h3>
+                    <p>Explore o campus em realidade virtual</p>
+                    <div class="card-footer">
+                        <span class="xp-badge">+50 XP</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="nav-card" onclick="openPage('quiz.html')">
+                    <div class="card-icon purple-gradient">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Quiz Interativo</h3>
+                    <p>Teste seus conhecimentos sobre a USP</p>
+                    <div class="card-footer">
+                        <span class="xp-badge">+30 XP</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="nav-card" onclick="openPage('historia.html')">
+                    <div class="card-icon green-gradient">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>História Timeline</h3>
+                    <p>Viaje através dos 91 anos da USP</p>
+                    <div class="card-footer">
+                        <span class="xp-badge">+40 XP</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="nav-card" onclick="openPage('laboratorio.html')">
+                    <div class="card-icon orange-gradient">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Laboratório Virtual</h3>
+                    <p>Experimente simulações científicas</p>
+                    <div class="card-footer">
+                        <span class="xp-badge">+60 XP</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="nav-card" onclick="openPage('ranking.html')">
+                    <div class="card-icon yellow-gradient">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Ranking Global</h3>
+                    <p>Compare seu progresso com outros usuários</p>
+                    <div class="card-footer">
+                        <span class="xp-badge">Ver Posição</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="nav-card" onclick="openPage('loja.html')">
+                    <div class="card-icon pink-gradient">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Loja de Recompensas</h3>
+                    <p>Troque seus pontos por prêmios</p>
+                    <div class="card-footer">
+                        <span class="xp-badge">Trocar XP</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Challenge -->
+    <section class="daily-challenge">
+        <div class="container">
+            <div class="challenge-card">
+                <div class="challenge-content">
+                    <div class="challenge-info">
+                        <div class="challenge-badge">
+                            <i class="fas fa-bolt"></i>
+                            <span>Desafio Diário</span>
+                        </div>
+                        <h3>Descubra 3 curiosidades sobre a USP</h3>
+                        <p>Complete hoje e ganhe 100 XP bônus + badge especial!</p>
+                    </div>
+                    <div class="challenge-timer">
+                        <div class="timer-display" id="dailyTimer">23:45</div>
+                        <div class="timer-label">Tempo restante</div>
+                        <button class="btn btn-white" onclick="acceptChallenge()">
+                            Aceitar Desafio
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo">USP</div>
+                        <span>USP Gamificada</span>
+                    </div>
+                    <p>Explore, aprenda e conquiste na maior universidade do Brasil.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Explorar</h4>
+                    <ul>
+                        <li><a href="tour.html">Tour Virtual</a></li>
+                        <li><a href="quiz.html">Quiz</a></li>
+                        <li><a href="historia.html">História</a></li>
+                        <li><a href="laboratorio.html">Laboratório</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Comunidade</h4>
+                    <ul>
+                        <li><a href="ranking.html">Ranking</a></li>
+                        <li><a href="conquistas.html">Conquistas</a></li>
+                        <li><a href="forum.html">Fórum</a></li>
+                        <li><a href="eventos.html">Eventos</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="ajuda.html">Central de Ajuda</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 USP Gamificada. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification System -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- Particle System -->
+    <div id="particles" class="particles"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

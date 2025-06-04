@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interativo - USP Gamificada</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="quiz-page">
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-left">
+                    <button class="btn btn-ghost" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i>
+                        Voltar
+                    </button>
+                    <div class="header-info">
+                        <h1>Quiz Interativo</h1>
+                        <p>Teste seus conhecimentos sobre a USP</p>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <button class="sound-toggle" onclick="toggleSound()">
+                        <i id="soundIcon" class="fas fa-volume-up"></i>
+                    </button>
+
+                    <div class="quiz-stats">
+                        <div class="streak-counter">
+                            <i class="fas fa-fire"></i>
+                            <span id="streakCount">0</span>
+                        </div>
+                        <div class="score-display">
+                            <div class="score-value" id="currentScore">0</div>
+                            <div class="score-label">pontos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Quiz Container -->
+    <div class="quiz-container">
+        <div class="container">
+            <!-- Progress Header -->
+            <div class="quiz-progress-header">
+                <div class="progress-info">
+                    <div class="question-counter">
+                        <i class="fas fa-brain"></i>
+                        <span>Questão <span id="currentQuestion">1</span> de <span id="totalQuestions">5</span></span>
+                    </div>
+                    <div class="question-meta">
+                        <span class="difficulty-badge" id="difficultyBadge">Fácil</span>
+                        <span class="category-badge" id="categoryBadge">História</span>
+                        <div class="timer-display">
+                            <i class="fas fa-clock"></i>
+                            <span id="timeLeft">30</span>s
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="quizProgress"></div>
+                </div>
+            </div>
+
+            <div class="quiz-layout">
+                <!-- Question Card -->
+                <div class="quiz-main">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <h2 id="questionText">Em que ano a USP foi oficialmente fundada?</h2>
+                        </div>
+
+                        <div class="options-container" id="optionsContainer">
+                            <!-- Options will be populated by JavaScript -->
+                        </div>
+
+                        <!-- Explanation -->
+                        <div class="explanation-card hidden" id="explanationCard">
+                            <div class="explanation-content">
+                                <div class="explanation-icon">
+                                    <i id="explanationIcon" class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="explanation-text">
+                                    <h3 id="explanationTitle">Correto!</h3>
+                                    <p id="explanationDescription">A USP foi fundada em 25 de janeiro de 1934.</p>
+                                    <div class="explanation-rewards">
+                                        <span class="xp-reward" id="xpReward">+100 XP</span>
+                                        <span class="streak-bonus hidden" id="streakBonus">Sequência x2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation -->
+                        <div class="quiz-navigation">
+                            <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()" disabled>
+                                <i class="fas fa-arrow-left"></i>
+                                Anterior
+                            </button>
+                            <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>
+                                <span id="nextBtnText">Próxima</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="quiz-sidebar">
+                    <!-- Timer Card -->
+                    <div class="sidebar-card timer-card">
+                        <div class="timer-circle">
+                            <div class="timer-value" id="timerValue">30</div>
+                            <div class="timer-label">segundos</div>
+                        </div>
+                        <div class="timer-progress">
+                            <div class="timer-progress-fill" id="timerProgress"></div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Card -->
+                    <div class="sidebar-card stats-card">
+                        <h3>Estatísticas</h3>
+                        <div class="stats-list">
+                            <div class="stat-row">
+                                <span>Pontuação:</span>
+                                <span id="sidebarScore">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>Acertos:</span>
+                                <span id="correctAnswers">0/0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>Sequência:</span>
+                                <div class="streak-display">
+                                    <i class="fas fa-fire"></i>
+                                    <span id="sidebarStreak">0</span>
+                                </div>
+                            </div>
+                            <div class="stat-row">
+                                <span>Melhor Sequência:</span>
+                                <span id="maxStreak">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Overview -->
+                    <div class="sidebar-card progress-card">
+                        <h3>Progresso</h3>
+                        <div class="question-indicators" id="questionIndicators">
+                            <!-- Question indicators will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Question Info -->
+                    <div class="sidebar-card info-card">
+                        <h3>Informações</h3>
+                        <div class="info-list">
+                            <div class="info-row">
+                                <span>Dificuldade:</span>
+                                <span class="difficulty-badge" id="sidebarDifficulty">Fácil</span>
+                            </div>
+                            <div class="info-row">
+                                <span>Categoria:</span>
+                                <span class="category-badge" id="sidebarCategory">História</span>
+                            </div>
+                            <div class="info-row">
+                                <span>Pontos Base:</span>
+                                <span id="basePoints">100</span>
+                            </div>
+                            <div class="info-row multiplier-row hidden" id="multiplierRow">
+                                <span>Multiplicador:</span>
+                                <span class="multiplier-value" id="multiplierValue">x1.0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Results Modal -->
+    <div id="resultsModal" class="modal">
+        <div class="modal-content results-modal">
+            <div class="results-header">
+                <div class="results-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2>Quiz Concluído!</h2>
+            </div>
+
+            <div class="results-content">
+                <div class="final-score">
+                    <div class="score-number" id="finalScore">0</div>
+                    <div class="score-label">Pontos Totais</div>
+                </div>
+
+                <div class="performance-badge">
+                    <i id="performanceIcon" class="fas fa-star"></i>
+                    <span id="performanceLevel">Iniciante</span>
+                </div>
+
+                <div class="results-stats">
+                    <div class="result-stat">
+                        <div class="stat-value" id="finalCorrect">0/5</div>
+                        <div class="stat-label">Acertos</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="stat-value" id="finalAccuracy">0%</div>
+                        <div class="stat-label">Precisão</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="stat-value" id="finalMaxStreak">0</div>
+                        <div class="stat-label">Melhor Sequência</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="stat-value" id="finalAvgTime">0s</div>
+                        <div class="stat-label">Tempo Médio</div>
+                    </div>
+                </div>
+
+                <div class="achievements-unlocked" id="achievementsUnlocked">
+                    <h3>Conquistas Desbloqueadas:</h3>
+                    <div class="achievement-badges" id="achievementBadges">
+                        <!-- Achievement badges will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button class="btn btn-primary" onclick="restartQuiz()">
+                        <i class="fas fa-redo"></i>
+                        Refazer Quiz
+                    </button>
+                    <button class="btn btn-secondary" onclick="goHome()">
+                        <i class="fas fa-home"></i>
+                        Voltar ao Início
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
