@@ -89,20 +89,8 @@ Tornar o conhecimento sobre a USP mais acessível e interessante, especialmente 
 
 1. **Clone o repositório**
 ```bash
-git clone https://github.com/seu-usuario/usp-gamificada.git
-cd usp-gamificada
-```
-
-2. **Opção 1: Servidor Local Simples**
-```bash
-# Python 3
-python -m http.server 8000
-
-# Python 2
-python -m SimpleHTTPServer 8000
-
-# Node.js (se tiver o http-server instalado)
-npx http-server
+git clone https://github.com/seu-usuario/SiteUsp.git
+cd SiteUsp
 ```
 
 3. **Opção 2: Live Server (VS Code)**
@@ -112,7 +100,7 @@ npx http-server
 
 4. **Acesse no navegador**
 ```
-http://localhost:8000
+https://github.com/StadlerEduardo/SiteUsp.git
 ```
 
 ## 📱 Como Usar
@@ -144,7 +132,7 @@ http://localhost:8000
 ## 📊 Estrutura do Projeto
 
 ```
-usp-gamificada/
+SiteUsp/
 ├── index.html              # Página principal
 ├── quiz.html               # Sistema de quiz
 ├── tour.html               # Tour virtual
