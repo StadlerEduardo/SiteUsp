@@ -203,11 +203,6 @@ O projeto inclui dados reais sobre a USP:
 
 ## 🔧 Funcionalidades Técnicas
 
-### Persistência de Dados
-- Progresso salvo no LocalStorage
-- Configurações de usuário persistentes
-- Histórico de conquistas
-
 ### Responsividade
 - Design mobile-first
 - Breakpoints: 480px, 768px, 1024px
@@ -216,7 +211,6 @@ O projeto inclui dados reais sobre a USP:
 ### Performance
 - Carregamento otimizado de imagens
 - CSS e JS minificados
-- Lazy loading para recursos pesados
 
 ## 🤝 Contribuindo
 
@@ -243,7 +237,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 👥 Autores
 
-- **Seu Nome** - *Desenvolvimento inicial* - [@seu-usuario](https://github.com/seu-usuario)
+- **Eduardo Henrique Stadler** - [@Eduardo Stadler](https://github.com/EduardoStadler)
 
 ## 🙏 Agradecimentos
 
@@ -254,25 +248,11 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 📞 Contato
 
-- **Email**: seu.email@exemplo.com
-- **LinkedIn**: [Seu Perfil](https://linkedin.com/in/seu-perfil)
-- **Portfolio**: [seu-portfolio.com](https://seu-portfolio.com)
+- **Email**: Henriqueeduardo381@gmail.com
+- **LinkedIn**:  (https://www.linkedin.com/in/eduardo-stadler-052046314/)
 
 ---
 
 <div align="center">
   <p>Feito com ❤️ para a comunidade USP</p>
-  <p>⭐ Se este projeto te ajudou, considere dar uma estrela!</p>
 </div>
-```
-
-Este README inclui todas as informações essenciais sobre seu projeto USP Gamificada, com:
-
-- **Descrição completa** do projeto e objetivos
-- **Lista detalhada** de todas as funcionalidades
-- **Instruções claras** de instalação e uso
-- **Documentação técnica** da estrutura
-- **Informações de design** e UX
-- **Sistema de gamificação** explicado
-- **Guia de contribuição** para outros desenvolvedores
-- **Formatação profissional** com badges e emojis
